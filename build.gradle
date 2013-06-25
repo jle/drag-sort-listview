@@ -1,0 +1,40 @@
+def getVersion(Project p, String baseVersion) {
+    if (p.has("release")) {
+        return baseVersion
+    }
+
+    return baseVersion + '-SNAPSHOT'
+}
+
+subprojects {
+    buildscript {
+        repositories {
+            mavenCentral()
+        }
+
+        dependencies {
+            classpath 'com.android.tools.build:gradle:0.4.2'
+        }
+    }
+
+    apply plugin: 'maven'
+    apply plugin: 'signing'
+
+    version = getVersion(project, '0.6.2')
+    group = "com.vandalsoftware.android"
+
+    configurations {
+        archives {
+            extendsFrom configurations.default
+        }
+    }
+
+    signing {
+        required { has("release") && gradle.taskGraph.hasTask("uploadArchives") }
+        sign configurations.archives
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.6'
+}

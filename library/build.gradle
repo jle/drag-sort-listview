@@ -1,0 +1,56 @@
+version = '0.6.2'
+
+apply plugin: 'android-library'
+
+android {
+    compileSdkVersion 17
+    buildToolsVersion '17.0.0'
+}
+
+dependencies {
+    compile files('libs/android-support-v4.jar')
+}
+
+uploadArchives {
+    configuration = configurations.archives
+    repositories.mavenDeployer {
+        beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+        repository(url: sonatypeRepo) {
+            authentication(userName: sonatypeUsername,
+                    password: sonatypePassword)
+        }
+
+        pom {
+            artifactId = 'dslv'
+            project {
+                name 'Drag Sort ListView'
+                packaging 'aar'
+                description 'Android ListView with drag and drop reordering.'
+                url 'https://github.com/jonathanle/drag-sort-listview'
+
+                scm {
+                    url 'scm:git@github.com:jonathanle/drag-sort-listview.git'
+                    connection 'scm:git@github.com:jonathanle/drag-sort-listview.git'
+                    developerConnection 'scm:git@github.com:jonathanle/drag-sort-listview.git'
+                }
+
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        distribution 'repo'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'bauerca'
+                        name 'Carl A. Bauer'
+                        email 'heycosmo@gmail.com'
+                    }
+                }
+            }
+        }
+    }
+}
