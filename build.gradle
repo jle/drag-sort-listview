@@ -20,7 +20,7 @@ subprojects {
     apply plugin: 'maven'
     apply plugin: 'signing'
 
-    version = getVersion(project, '0.6.2')
+    version = getVersion(project, '0.6.3')
     group = "com.vandalsoftware.android"
 
     configurations {
