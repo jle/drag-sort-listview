@@ -22,6 +22,9 @@ subprojects {
 
     version = getVersion(project, '0.6.3')
     group = "com.vandalsoftware.android"
+    if (!has("release")) {
+        ext.sonatypeRepo = sonatypeSnapshotRepo
+    }
 
     configurations {
         archives {
