@@ -20,7 +20,7 @@ subprojects {
     apply plugin: 'maven'
     apply plugin: 'signing'
 
-    version = getVersion(project, '0.6.3')
+    version = getVersion(project, '0.6.4')
     group = "com.vandalsoftware.android"
     if (!has("release")) {
         ext.sonatypeRepo = sonatypeSnapshotRepo
